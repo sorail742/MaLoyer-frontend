@@ -1,16 +1,24 @@
-# DarMeuble — Frontend
+# MaLoyer — Frontend
 
-Frontend Next.js de DarMeuble, plateforme SaaS multi-tenant de gestion
-locative d'immeubles. Voir le dépôt `darmeuble-kit` (kit de démarrage,
-dépôt séparé) et `darmeuble-backend` (API, dépôt séparé) pour la
-documentation de référence complète :
+Frontend Next.js de **MaLoyer** (nom de code interne : DarMeuble),
+plateforme SaaS multi-tenant de gestion locative d'immeubles. Dépôt
+GitHub : `git@github.com:sorail742/MaLoyer-frontend.git`.
+
+**`AGENTS.md`** — règles condensées pour tout agent IA (Antigravity,
+Cursor, Claude Code) travaillant sur ce dépôt ; à lire en premier.
+**`docs/adr/`** — décisions d'architecture de ce dépôt.
+
+Voir aussi le dépôt `darmeuble-kit` (kit de démarrage, dépôt séparé) et
+`darmeuble-backend` (API, dépôt séparé) pour la documentation de référence
+complète :
 
 - `darmeuble-kit/docs/cahier-des-charges.md` — source de vérité fonctionnelle.
 - `darmeuble-kit/docs/frontend/socle-frontend.md` — décisions de socle
   (stack, arborescence, auth, trois espaces).
 - `darmeuble-kit/docs/frontend/architecture.md`, `contrat-api.md`,
   `design-system.md`, `testing.md`, `workflow.md`.
-- `darmeuble-kit/docs/frontend/adr/` — Architecture Decision Records.
+- `darmeuble-kit/docs/frontend/adr/` — ADR sources (avant formalisation
+  dans `docs/adr/` de ce dépôt).
 
 ## État actuel — Phase 1 (Socle)
 
