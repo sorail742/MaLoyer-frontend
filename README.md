@@ -81,9 +81,13 @@ côté backend), composants Lot C du design system
 nvm use            # voir .nvmrc — doit correspondre à darmeuble-backend
 cp .env.example .env.local
 # BACKEND_URL=http://localhost:3000 (darmeuble-backend en local)
-npm install
-npm run dev         # http://localhost:3010
+pnpm install
+pnpm run dev         # http://localhost:3010
 ```
+
+Gestionnaire de paquets : `pnpm` (`docs/adr/0003-*.md`, addendum
+2026-09-19) — le backend reste sur `npm`, les deux dépôts n'ont pas la même
+contrainte.
 
 Le backend (`darmeuble-backend`) doit tourner en parallèle (`npm run
 start:dev`, port 3000 par défaut) pour que la connexion et le tableau de

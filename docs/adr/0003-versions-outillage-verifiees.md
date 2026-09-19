@@ -63,3 +63,16 @@ contrôle.
 **Copier les gabarits du kit tels quels.** Aurait produit un projet qui ne
 compile pas (`@apply` non reconnu) et un lint qui plante
 (`eslint-plugin-react` incompatible) dès la première commande.
+
+## Addendum — 2026-09-19 : gestionnaire de paquets `pnpm`
+
+Décision produit explicite : ce dépôt utilise `pnpm`, pas `npm`. Backend
+(`darmeuble-backend`) reste sur `npm` — les deux dépôts n'ont pas la même
+contrainte, ne pas aligner les deux par souci de cohérence sans demande
+explicite (même principe que le point 6 de cet ADR pour ESLint).
+
+`package.json` porte `"packageManager": "pnpm@<version>"` (lu par
+`corepack`, garantit la même version d'installation en local et en CI).
+`package-lock.json` supprimé, `pnpm-lock.yaml` commité à sa place — plus de
+lockfile npm dans ce dépôt. CI (`.github/workflows/ci.yml`) installe via
+`pnpm/action-setup` puis `pnpm install --frozen-lockfile`.

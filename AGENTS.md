@@ -18,17 +18,21 @@ d'écrire une ligne*, pas une redite intégrale.
 ## Commandes
 
 ```bash
-npm install
-npm run dev            # port 3010 — nécessite darmeuble-backend démarré (port 3000)
-npm run lint            # ESLint (eslint-config-next + import/no-restricted-paths)
-npm run typecheck        # tsc --noEmit
-npm test                  # Vitest
-npm run build              # next build
-npm run start                # preview d'un build de production (pas pour Docker, voir docs/adr/0003-*.md)
+pnpm install
+pnpm run dev            # port 3010 — nécessite darmeuble-backend démarré (port 3000)
+pnpm run lint            # ESLint (eslint-config-next + import/no-restricted-paths)
+pnpm run typecheck        # tsc --noEmit
+pnpm test                  # Vitest
+pnpm run build              # next build
+pnpm run start                # preview d'un build de production (pas pour Docker, voir docs/adr/0003-*.md)
 ```
 
 Node exact requis : voir `.nvmrc` (doit correspondre à celui de
-`darmeuble-backend`). Un seul gestionnaire de paquets (`npm`).
+`darmeuble-backend`). Gestionnaire de paquets : **`pnpm`** uniquement
+(`docs/adr/0003-*.md`, addendum 2026-09-19) — jamais `npm`/`yarn`, jamais de
+`package-lock.json`/`yarn.lock` en parallèle de `pnpm-lock.yaml`. Backend
+(`darmeuble-backend`) reste sur `npm`, ne pas aligner les deux sans demande
+explicite.
 
 ## Ce qui ne se discute pas
 
@@ -70,6 +74,29 @@ Node exact requis : voir `.nvmrc` (doit correspondre à celui de
 - **Français exclusivement** (cahier des charges §8) — pas de `next-intl`
   tant que ce choix ne change pas, texte en dur en français dans les
   composants.
+
+## Choisir quel ticket travailler (priorité)
+
+Avant de commencer, vérifier sur GitHub Issues — jamais deviner depuis le
+nom de l'écran (un agent qui construit un écran non prioritaire pendant
+qu'un autre, plus prioritaire, reste ouvert produit du travail à refaire) :
+
+1. **Respecter « Bloqué par sorail742/MaLoyer-backend#N »** dans le corps
+   du ticket — ne jamais démarrer un écran dont le module backend associé
+   est encore ouvert.
+2. **Parmi les tickets non bloqués, `prio::high` avant `medium` avant
+   `low`**, à égalité respecter l'ordre des phases. Ne pas sauter à une
+   phase ultérieure pendant qu'un ticket `prio::high` d'une phase
+   antérieure est encore ouvert, sauf demande explicite de l'utilisateur.
+3. **Un écran listé dans `docs/adr/0004-*.md`** (bloqué par une décision
+   produit backend encore « Proposée ») ne se construit pas en devinant la
+   réponse — voir la section « Ce qui ne bloque pas » de cet ADR pour ce
+   qui peut avancer sans attendre.
+4. Un ticket `epic` (label `epic`) ne se ferme jamais directement — le
+   travail se fait sur ses sous-issues.
+
+Discipline `prio::`/`effort::` inspirée de `smartsms-frontend`
+(`docs/pilotage-equipe.md` : « un ticket entre étiqueté, ou n'entre pas »).
 
 ## Où trouver le reste
 

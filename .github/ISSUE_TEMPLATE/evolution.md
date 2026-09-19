@@ -37,6 +37,6 @@ plusieurs. Observable, pas une description d'implémentation. -->
 - [ ] Appel effectué via le proxy `/api/*` uniquement, jamais le backend directement.
 - [ ] Les quatre états (chargement/vide/erreur/nominal) gérés via `AsyncBoundary`/`EmptyState`/`ErrorState`.
 - [ ] Test component (Vitest + Testing Library) si logique métier, état ou appel API.
-- [ ] `npm run lint`, `npm run typecheck` propres — zéro nouvelle erreur.
+- [ ] `pnpm run lint`, `pnpm run typecheck` propres — zéro nouvelle erreur.
 - [ ] Documentation mise à jour si le changement l'impose (ADR, README).
 - [ ] Ce qui reste à faire a son propre ticket, pas un commentaire dans le code.

@@ -50,6 +50,29 @@ inventer un.
   (Vitest + Testing Library). Un composant purement présentationnel n'en a
   pas besoin.
 
+## Choisir quel ticket travailler (priorité)
+
+Avant de commencer, vérifier sur GitHub Issues — jamais deviner depuis le
+nom de l'écran :
+
+- **Respecter « Bloqué par sorail742/MaLoyer-backend#N »** — ne jamais
+  démarrer un écran dont le module backend dont il dépend est encore
+  ouvert.
+- **Parmi les tickets non bloqués, `prio::high` avant `medium` avant
+  `low`**, à égalité l'ordre des phases (`phase-2-immeubles-baux` → … →
+  `phase-7-tests-lancement`). Ne pas sauter à une phase ultérieure pendant
+  qu'un ticket `prio::high` d'une phase antérieure est encore ouvert, sauf
+  demande explicite de l'utilisateur.
+- **Un écran référencé dans `docs/adr/0004-*.md`** (bloqué par une décision
+  produit backend encore « Proposée ») ne se construit pas en devinant la
+  réponse — construire d'abord ce qui n'en dépend pas (voir la section « Ce
+  qui ne bloque pas » de cet ADR).
+- Un ticket `epic` ne se ferme jamais directement — le travail se fait sur
+  ses sous-issues.
+
+Discipline `prio::`/`effort::` inspirée de `smartsms-frontend`/
+`smartsms-backend` (`docs/pilotage-equipe.md`).
+
 ## Git / GitHub
 
 - Branche `feature/*` depuis `develop`. Jamais de push ni de merge direct

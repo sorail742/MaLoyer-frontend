@@ -23,13 +23,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: npm
-      - run: npm ci --no-engine-strict
-      - run: npm run lint
-      - run: npm run typecheck
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
+      - run: pnpm run typecheck
 
   # Avant `test`, même raisonnement que darmeuble-backend/.github/workflows/ci.yml
   # (voir docs/adr/0007-*.md de ce dépôt frère) : un `next build` qui casse
@@ -40,12 +41,13 @@ jobs:
     needs: [lint]
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: npm
-      - run: npm ci --no-engine-strict
-      - run: npm run build
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
 
   test:
     name: test
@@ -53,12 +55,13 @@ jobs:
     needs: [build]
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: npm
-      - run: npm ci --no-engine-strict
-      - run: npm test
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
 
   # e2e (Playwright) : aucun parcours réel n'existe encore (voir
   # darmeuble-kit/docs/frontend/testing.md — un parcours par flux clé, une
