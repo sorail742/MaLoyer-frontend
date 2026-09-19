@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+    branches: [develop, main]
+
+concurrency:
+  group: ci-frontend-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "24.21.0"
+  # Jamais consultée réellement au build (aucune page n'est statique, voir
+  # docs/adr/0001-*.md) — placeholder pour éviter tout effet de bord si un
+  # écran devient statique par erreur.
+  BACKEND_URL: "http://localhost:3000"
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --no-engine-strict
+      - run: npm run lint
+      - run: npm run typecheck
+
+  # Avant `test`, même raisonnement que darmeuble-backend/.github/workflows/ci.yml
+  # (voir docs/adr/0007-*.md de ce dépôt frère) : un `next build` qui casse
+  # ne doit jamais être découvert seulement par une régression de test.
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --no-engine-strict
+      - run: npm run build
+
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --no-engine-strict
+      - run: npm test
+
+  # e2e (Playwright) : aucun parcours réel n'existe encore (voir
+  # darmeuble-kit/docs/frontend/testing.md — un parcours par flux clé, une
+  # fois implémenté) ; job à ajouter avec MaLoyer-frontend "Tests e2e &
+  # lancement production (frontend)".
