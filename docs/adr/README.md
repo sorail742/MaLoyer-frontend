@@ -11,6 +11,7 @@ décision, numérotation séquentielle, jamais réécrit une fois accepté.
 | [0002](0002-jeton-cookie-httponly-proxy.md) | Jeton en cookie httpOnly, proxy et enveloppe de réponse | Accepté |
 | [0003](0003-versions-outillage-verifiees.md) | Versions d'outillage vérifiées à l'implémentation | Accepté |
 | [0004](0004-ecrans-bloques-decisions-backend.md) | Écrans bloqués par des décisions produit backend en attente | Proposé — bloqué sur des ADR backend |
+| [0005](0005-localisation-guinee-afrique.md) | Conventions de localisation Guinée/Afrique | Accepté |
 
 ## Quand créer un nouvel ADR
 
